@@ -30,7 +30,7 @@ def load_users():
         # We need to add to the session or it won't ever be stored
         db.session.add(user)
 
-    # # Once we're done, we should commit our work
+    # # # Once we're done, we should commit our work
     db.session.commit()
 
 
@@ -47,7 +47,7 @@ def load_movies():
         row = row.rstrip()
         data = row.split('|')
         movie_id = data[0] 
-        title = data[1].split('(')[0].decode('latin-1')
+        title = data[1].split('(')[0].rstrip()
         
         released_str = data[2]
         if released_str:
@@ -73,8 +73,7 @@ def load_ratings():
     
     for row in open("seed_data/u.data"):
         row = row.rstrip()
-        movie_id, user_id, score = row.split()[:3]
-        #print(rating_id, movie_id, user_id, score)
+        user_id, movie_id, score = row.split()[:3]
         rating = Rating(movie_id = movie_id,
                        user_id = user_id,
                        score = score)
@@ -105,8 +104,7 @@ def set_val_movie_id():
     # Get the Max user_id in the database
     result = db.session.query(func.max(Movie.movie_id)).one()
     max_id = int(result[0])
-    print(max_id)
-
+    
     # Set the value for the next user_id to be max_id + 1
     query = "SELECT setval('movies_movie_id_seq', :new_id)"
     db.session.execute(query, {'new_id': max_id + 1})
