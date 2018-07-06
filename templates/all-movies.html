@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Movies</h2>
+
+<table>
+    <th>Movie Title</th>
+    <th>Rating</th>
+    {% for movie in movies_dict %}
+    <tr>
+        <td>
+            <a href="/movie-info?title={{movie}}">
+            {{ movie }})
+        </a>
+        </td>
+        <td> {{ movies_dict[movie][1] }}
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+{% endblock %}

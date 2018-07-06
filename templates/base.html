@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ratings</title>
+</head>
+<body>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+
+{% for message in messages %}
+<span>{{ message }} </span>
+{% endfor %}
+
+
+{% endif %}
+{% endwith %}
+
+{% if not session %}
+<form action = "/login">
+    <input type='submit' value="Log In">
+</form>
+
+{% else %}
+<form action = "/logout">
+<input type='submit' value="Log Out">
+</form>
+{% endif %}
+
+
+
+<br>
+    Ratings
+    <hr>
+    {% block content %} put your content here {% endblock %}
+
+</body>
+</html>

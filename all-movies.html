@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Movies</h2>
+
+<ul>
+    {% for movie in movies_dict %}
+    <li>
+        <a href="{{ movies_dict[movie] }}">
+            {{ movie }})
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

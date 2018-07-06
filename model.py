@@ -67,6 +67,7 @@ class Rating(db.Model):
         s = f"""<Rating rating_id={self.rating_id}
                  movie_id={self.movie_id}
                  user_id={self.user_id}"""
+        return s
 
 ##############################################################################
 # Helper functions
@@ -77,6 +78,7 @@ def connect_to_db(app):
     # Configure to use our PstgreSQL database
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///ratings'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_ECHO'] = True
     db.app = app
     db.init_app(app)
 
